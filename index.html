@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"> <!--codification-->
+        <meta name="viewport" content="width=device-width">
+        <title>Asier Garcia Pelaez project's portfolio</title>
+        <link rel="icon" href="./images/Asier foto perfil.jpg" type="image/jpg"> 
+        <meta name="description" content="Asier Garcia Pelaez's personal portfolio website">
+
+        <!--open graph meta tags-->
+        <meta property="og:title" content="Asier Garcia Pelaez project's portfolio">
+        <meta property="og:description" content="Asier Garcia Pelaez's personal portfolio website">
+        <meta property="og:image" content="./images/Asier foto perfil.jpg">
+        <meta property="og:image:alt" content="Asier Garcia Pelaez's profile photo">
+
+        <link rel="alternate" href="./index.html" hreflang="en">
+        <link rel="canonical" href="./index.html">
+
+        <style>
+            body {
+                font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+                color: #E5007D;
+                background-color: #4B0082;
+            }
+
+            h1, h2, h3, h4 {
+                color: #FFED00;
+                border-width: 1px;
+                border-style: solid;
+                border-color: currentColor;
+            }
+
+            .link {
+                color: hwb(152 21% 46%);
+            }
+
+            .link:hover {
+                color: hwb(180 4% 96%);
+            }
+
+            .button {
+                border-radius: 10%;
+                padding: 3px;
+                background-color: hwb(152 21% 46%);
+                color: hwb(0 0% 100%);
+            }
+
+            .button:hover {
+                background-color: hwb(180 4% 96%);
+                color: hwb(152 21% 46%);
+            }
+
+            input:focus,
+            textarea:focus {
+                outline: none;
+                border: 1px solid;
+                border-color: hwb(152 21% 46%);
+                box-shadow: none;
+            }
+
+            input, textarea {
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+            }
+
+            input:required, textarea:required,
+            input:invalid, textarea:invalid {
+                box-shadow: none;
+            }
+
+            footer a {
+                color: hwb(152 21% 46%);
+            }
+            .about-me-item {
+                margin-bottom: 10px;
+            }
+            #asier-profile-photo {
+                border-radius: 50%;
+                display: block;
+                margin: 20px 0;
+            }
+
+            .intro .bold{
+                color: hwb(152 21% 46%);
+            }
+        </style>
+
+        <script>
+            // deferred until DOMContentLoaded so the canvas element exists before this runs
+            document.addEventListener('DOMContentLoaded', () => {
+                const canvas = document.getElementById('drawing-canvas');
+                const ctx = canvas.getContext('2d');
+                let drawing = false;
+
+                function getPos(event) {
+                    const rect = canvas.getBoundingClientRect();
+                    const point = event.touches ? event.touches[0] : event;
+                    return { x: point.clientX - rect.left, y: point.clientY - rect.top };
+                }
+
+                function startDrawing(event) {
+                    drawing = true;
+                    const { x, y } = getPos(event);
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                }
+
+                function draw(event) {
+                    if (!drawing) return;
+                    event.preventDefault();
+                    const { x, y } = getPos(event);
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                }
+
+                function stopDrawing() {
+                    drawing = false;
+                }
+
+                canvas.addEventListener('mousedown', startDrawing);
+                canvas.addEventListener('mousemove', draw);
+                canvas.addEventListener('mouseup', stopDrawing);
+                canvas.addEventListener('mouseleave', stopDrawing);
+                canvas.addEventListener('touchstart', startDrawing);
+                canvas.addEventListener('touchmove', draw);
+                canvas.addEventListener('touchend', stopDrawing);
+
+                document.getElementById('clear-canvas-btn').addEventListener('click', () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                });
+
+                document.querySelector('form').addEventListener('submit', () => {
+                    document.getElementById('drawing-data').value = canvas.toDataURL('image/png');
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to Asier's Website</h1>
+            <nav>
+                <ul>
+                    <li><a class="link" href="#about-me">About Me</a></li> <!-- Internal links-->
+                    <li><a class="link" href="#favourite-tools">Favourite Tools</a></li> <!-- Internal links-->
+                    <li><a class="link" href="#my-projects">My Projects</a></li> <!-- Internal links-->
+                    <li><a class="link" href="#frequent-questions">Frequent Questions</a></li> <!-- Internal links-->
+                    <li><a class="link" href="#contact-form">Contact Form</a></li> <!-- Internal links-->
+                    <li><a class="link" href="#video-section">Video Section</a></li> <!-- Internal links-->
+                    <li><a class="link" href="https://www.linkedin.com/in/asier-garcia-pelaez/" target="_blank" rel="noopener noreferrer">Linkedin</a></li> <!-- External link-->
+                </ul>
+            </nav>
+        </header>
+
+        <main> 
+        <p class="intro">This is my <strong class="bold">personal website</strong> where I share my projects.</p>
+        
+
+        <a download href="/images/Asier foto perfil.jpg" title="Download Asier's profile photo">
+        <img
+        id="asier-profile-photo"
+        width="200"
+        height="200"
+        alt="Asier profile's photo" 
+        title="Asier's photo"
+        src="./images/Asier foto perfil.jpg"
+        >
+        </a>
+
+        <h2 id="about-me">About me</h2>
+        <ul>
+            <li class="about-me-item">I am a <strong class="bold">software / data ingeenier</strong>.</li>
+            <li class="about-me-item">I have experience in both front-end and back-end development.</li>
+            <li class="about-me-item">My favorite tool is Palantir Foundry.</li> 
+            <li class="about-me-item">I enjoy creating personal projects.</li>
+            <li class="about-me-item">I love learning new technologies.</li>
+            <li class="about-me-item"><button class="button" id="fun-fact" type="button">Fun Fact</button></li>
+        </ul>
+
+        <dialog id="fun-fact-dialog">
+            <p>Here is a fun fact about me! When I ended high school, I began the school for physical education before switching to software and data engineering.</p>
+            <button class="button" id="close-fun-fact">Close the fun fact</button>
+        </dialog>
+
+        <script>
+            window['fun-fact'].addEventListener('click', () => {
+                window['fun-fact-dialog'].showModal();
+            });
+            window['close-fun-fact'].addEventListener('click', () => {
+                window['fun-fact-dialog'].close();
+            });
+        </script>
+
+        <!-- this is a comment -->
+         <aside>
+            <header>
+                <h3 id="favourite-tools">Favourite Tools</h3>
+            </header>
+            <ol>
+                <li><strong>Backend</strong>
+                    <ul>
+                        <li>Node.js</li>
+                        <li>Python</li>
+                        <li>Palantir Foundry</li>
+                    </ul>
+                </li>
+                <li><strong>Frontend</strong>
+                    <ul>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JS/TS</li>
+                    </ul>
+                </li>
+            </ol>
+        </aside>
+
+        <section>
+            <article>
+                <header>
+                    <h4 id="my-projects">My Projects</h4>
+                </header>
+                <p>Here I will showcase some of my personal projects.</p>
+                <footer>
+                    <small>More projects coming soon!</small>
+                </footer>
+            </article>
+        </section>
+
+        <section>
+            <h4 id="frequent-questions">Frequent Questions</h4>
+            <p>Here are some of the questions I frequently receive.</p>
+            <details open="open">
+                <summary>What is your favorite programming language?</summary>
+                <p>My favorite programming language is JavaScript, but I also enjoy working with Python and TypeScript.</p>
+            </details>
+            <details>
+                <summary>What kind of projects do you work on?</summary>
+                <p>I work on a variety of projects, including web development, data analysis, and personal projects.</p>
+            </details>
+        </section>
+
+        <section>
+            <h4 id="contact-form">Contact Form</h4>
+            <form method="post" action="/">
+                <fieldset>  
+                    <legend>Personal Information</legend>
+                    <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                    </div>
+                    <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="#34666920306" pattern="#[0-9]{1,3}[0-9]{9}">
+                    </div>
+                    <div> 
+                        <label for="why-are-you-contacting-me">Reason for Contacting Me:</label>
+                        <input list="why-are-you-contacting-me" name="why-are-you-contacting-me" required placeholder="Select a reason">
+                        <datalist id="why-are-you-contacting-me">
+                            <option value="General Inquiry">
+                            <option value="Project Collaboration">
+                            <option value="Job Opportunity">
+                            <option value="Other">
+                        </datalist>
+                    </div>
+                    <div>    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required placeholder="Enter your message"></textarea>
+                    </div>
+                    <div>
+                        <label for="drawing-canvas">Sign here to confirm everything above is true (100% legal)</label>
+                        <br>
+                        <canvas id="drawing-canvas" width="400" height="200" style="border: 1px solid #333; background-color: hwb(152 21% 46%); touch-action: none; cursor: crosshair;"></canvas>
+                        <br>
+                        <button class="button" type="button" id="clear-canvas-btn">Clear signature</button>
+                        <input type="hidden" id="drawing-data" name="signature-data">
+                    </div>
+                    <div>
+                    <button class="button" type="submit">Send</button>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <section>
+            <h4 id="video-section">Video</h4>
+            <p>This is a video section where you can learn more about HTML concepts and techniques.</p>
+            <iframe
+            style="width: 100%; aspect-ratio: 16/9;"
+            src="https://www.youtube.com/embed/3nYLTiY5skU?si=Wite6GP6UFyF3sh6" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; 
+            autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Asier Garcia Pelaez. All rights reserved.</p>
+            <a href="mailto:asiergarcia9@gmail.com">Send Me an Email</a>
+            <a href="tel:+34666920306">Call Me</a>
+        </footer>
+
+        
+    </body>
+</html>
